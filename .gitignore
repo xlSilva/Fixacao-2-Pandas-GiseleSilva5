@@ -1,0 +1,9 @@
+venv
+.upm
+.breakpoints
+.cache
+.config
+.lesson
+.replit
+replit.nix
+populacao_continente.csv
