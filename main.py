@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 df_world_population = pd.read_csv('world_population.csv', index_col = 'Rank')
 print(df_world_population.shape, end = '\n\n')
@@ -56,6 +57,13 @@ print ('4 - Considerando os dados apresentados, é possivel realizar uma operaç
 df_world_population['2021_population'] = df_world_population[['2020_population','2022_population']].mean(axis = 1)
 df_world_population.head()
 
+#Ordenando as colunas dos anos em ordem crescente
+df_world_population.sort_index(axis = 1, inplace= True)
+#df_world_population.head()
+order = ['continent'] + [col for col in df_world_population.columns if col != 'continent']
+df_world_population = pd.concat([df_world_population[order[:1]], df_world_population[order[1:]]], axis=1)
+print(df_world_population.head())
+
 print(f'Considerando os dados apresentados, os possiveis valores para a população mundial em 2021,\
       seriam:{df_world_population["2021_population"]}', end='\n\n')
 
@@ -80,9 +88,5 @@ print('O continente mais populoso em 1970 era a Asia e em 2022 continua a ser a 
 df_populatin_by_continent.to_csv('populacao_continente.csv')
 
 #Grafico de concentração populacional por continente
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 df_populatin_by_continent.plot(title='População de Mundial de 1970 e 2022')
-
-
-
-
